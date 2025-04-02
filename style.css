@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family:'Courier New', Courier, monospace;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-sizing: border-box;
 }
 
@@ -12,7 +12,7 @@ body{
 .card{
     width: 90%;
     max-width: 470px;
-    background: linear-gradient(135deg, #a8bba2, #87a8a4);
+    background: linear-gradient(5deg, #2b5876, #4e4376);
     color: #ffffff;
     margin: 100px auto 0;
     border-radius: 20px;
@@ -27,16 +27,70 @@ body{
 }
 
 .search input{
+    width: 85%;
+    padding: 20px;
+    border-radius:355px; /* More rounded for a pill shape */
+    border: none;
+    outline: none;
+}
 
-    border: 0;
-    outline: 0;
-    background: #ebfffc;
-    color: #555;
-    padding: 10px 25px;
-    height: 60px;
-    border-radius: 30px;
-    flex: 1;
-    mergin-right:1 16px;
-    font-size: 18px;
+.search button {
 
+    border: none;
+    outline: none;
+    background: #ebebeb;
+    border-radius: 70%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.search button img {
+    width: 20px;  /* Adjust size as needed */
+}
+
+.weather-icon {
+    width: 130px;  /* Adjust size */
+    height: auto;
+    margin-top: 50px;  /* Moves it down */
+}
+
+.weather h1{
+    font-size: 40px;
+    font-size: 40px;
+    font-weight: 100;
+    margin-top: 15px;
+}
+
+.weather h2{
+    font-size: 35px;
+    font-weight: 300;
+    margin-top: -10px;
+}
+.details{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+    
+}
+.col{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img{
+    width: 50px;
+    margin-right: 20px;
+}
+
+.humidity, .wind{
+    font-size: 28px;
+    margin-top: -6px;
 }
