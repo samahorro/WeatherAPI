@@ -1,46 +1,93 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
-    <html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    <head>
+  <body>
+    <div class="card">
+      <div class="search">
+        <input type="text" placeholder="Enter City Name" spellcheck="false" />
+        <button><img src="images\search.png.png" /></button>
+      </div>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Weather App</title>
-        <link rel ="stylesheet" href="style.css">
-
-    </head>
-
-    <body>
-        
-        <div class = "card">
-            <div class="search">
-                <input type="text" placeholder="Enter City Name" spellcheck="false">
-                <button><img src="images\search.png.png"> </button>
+      <div class="weather">
+        <img src="images/location.png" class="weather-icon" />
+        <h1 class="temp"></h1>
+        <h2 class="city"></h2>
+        <div class="details">
+          <div class="col">
+            <img src="images/humidity.png" />
+            <div>
+              <p class="humidity"></p>
+              <p>Humidity</p>
             </div>
+          </div>
 
-            <div class = "weather"> 
-                <img src = "images/rain (2).png" class="weather-icon">
-                <h1 class="temp">64°f</h1>
-                <h2 class="city">California</h2>
-                <div class="details">
-                <div class="col">
-                    <img src="images/humidity.png">
-                    <div>
-                        <p class="humidity">50%</p>
-                        <p>Hsumidity</p>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <img src="images/wind.png">
-                    <div>
-                        <p class="wind">5 mph</p>
-                        <p>Wind Speed</p>
-                    </div>
-                </div>
-                </div>
+          <div class="col">
+            <img src="images/wind.png" />
+            <div>
+              <p class="wind"></p>
+              <p>Wind Speed</p>
             </div>
-</div>
-    </body>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    </html>
+    <script>
+      const apiKey = "09ff83f3558545784668cc8d52875b66";
+
+      const apiURL =
+        "https://api.openweathermap.org/data/2.5/weather?&units=imperial&q=bangalore";
+
+      async function checkWeather(city) {
+        try {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          console.log(data);
+          document.querySelector(".city").innerHTML = data.name;
+          document.querySelector(".temp").innerHTML =
+            Math.round(data.main.temp) + "°F";
+          document.querySelector(".humidity").innerHTML =
+            data.main.humidity + "%";
+          document.querySelector(".wind").innerHTML =
+            Math.round(data.wind.speed) + " mph";
+
+          const weatherIcon = document.querySelector(".weather-icon");
+          if (data.weather[0].main == "Clouds") {
+            weatherIcon.src = "images/cloudy.png";
+          } else if (data.weather[0].main == "Clear") {
+            weatherIcon.src = "images/sun.png";
+          } else if (data.weather[0].main == "Rain"){
+            weatherIcon.src = "images/rain.png";
+          } else if (data.weather[0].main == "Snow"){
+            weatherIcon.src = "images/snow.png";
+          }
+        } catch (error) {
+          console.error("Error fetching weather data:", error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+
+        searchBtn.addEventListener("click", () => {
+          checkWeather(searchBox.value);
+        });
+      });
+    </script>
+  </body>
+</html>
