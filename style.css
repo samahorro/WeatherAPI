@@ -55,6 +55,19 @@ body {
   width: 130px; /* Adjust size */
   height: auto;
   margin-top: 50px; /* Moves it down */
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .weather h1 {
